@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 export interface ImageLoaderProps extends BoxProps {
   imageUrl: string
   altText: string
-  width?: number
   height?: number
   handleGifClick?: () => void
 }
@@ -13,7 +12,7 @@ export const GiphyImageLoader = ({
   imageUrl,
   altText,
   height = 200,
-  ...props
+  ...boxProps
 }: ImageLoaderProps &
   React.DetailedHTMLProps<
     React.ImgHTMLAttributes<HTMLImageElement>,
@@ -25,16 +24,15 @@ export const GiphyImageLoader = ({
 
   return (
     <Box
-      style={{
-        width: `calc(min(200px, 50vw - 8px))`,
-        height: `${height}px`,
-        backgroundColor: '#ccc',
-        borderRadius: `16px`
-      }}
+      width={`calc(min(200px, 50vw - 8px))`}
+      height={`${height}px`}
+      bgcolor="#ccc"
+      borderRadius="16px"
       sx={{
-        breakInside: `avoid`,
+        breakInside: 'avoid',
         marginBottom: 2
       }}
+      {...boxProps}
     >
       <img
         src={loaded ? imageUrl : placeholder}
@@ -48,7 +46,6 @@ export const GiphyImageLoader = ({
         }}
         onLoad={() => setLoaded(true)}
         onClick={handleGifClick}
-        {...props}
       />
     </Box>
   )

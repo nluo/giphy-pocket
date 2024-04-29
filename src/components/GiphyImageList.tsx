@@ -1,9 +1,9 @@
 import { Box, BoxProps } from '@mui/material'
-import { GIFObject } from '../api-types'
+import { GifObject } from '../api-types'
 
 export interface GiphyImageListProps extends BoxProps {
-  items: GIFObject[]
-  renderItem: (item: GIFObject) => React.ReactNode
+  items: GifObject[]
+  renderItem: (item: GifObject) => React.ReactNode
 }
 
 export const GiphyImageList = ({

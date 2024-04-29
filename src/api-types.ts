@@ -82,7 +82,7 @@ interface Images {
   }
 }
 
-export interface GIFObject {
+export interface GifObject {
   type: string
   id: string
   slug: string
@@ -123,5 +123,5 @@ export interface BaseGiphyResponse {
 }
 
 export interface GiphyTrendingResponse extends BaseGiphyResponse {
-  data: GIFObject[]
+  data: GifObject[]
 }

@@ -8,9 +8,10 @@ import {
 
 import { GiphyImageList } from './GiphyImageList'
 import { GiphyImageLoader } from './GiphyImageLoader'
-import { GIFObject } from '../api-types'
+import { GifObject } from '../api-types'
 import { useGiphyPagination } from '../hooks/useTrendingGiphy'
 import { useState } from 'react'
+import { useDrawerContext } from '../context/DrawerContext'
 
 export interface GiphyImageContainerProps extends BoxProps {
   numPerPage?: number
@@ -27,10 +28,13 @@ export const GiphyImageContainer = ({
     numPerPage,
     submittedSearchTerm
   )
-  const handleGifClick = (gif: GIFObject) => () => {
+  const { setSelectedGif, setIsDrawerOpen } = useDrawerContext()
+  const handleGifClick = (gif: GifObject) => () => {
     console.log(`🚀 ------------------------------🚀`)
     console.log(`🚀 ~ handleGifClick ~ gif:`, gif)
     console.log(`🚀 ------------------------------🚀`)
+    setSelectedGif(gif)
+    setIsDrawerOpen(true)
   }
   const handlePageChange = (
     _event: React.ChangeEvent<unknown>,

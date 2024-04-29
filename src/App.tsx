@@ -9,6 +9,8 @@ import ClearIcon from '@mui/icons-material/Clear'
 import { useState } from 'react'
 import './App.css'
 import { GiphyImageContainer } from './components/GiphyImageContainer'
+import { GiphyImageDrawer } from './components/GiphyImageDrawer'
+import { DrawerContextProvider } from './context/DrawerContext'
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('')
@@ -82,7 +84,14 @@ function App() {
         alignItems="center"
         flex={1}
       >
-        <GiphyImageContainer submittedSearchTerm={submittedSearchTerm} />
+        <DrawerContextProvider>
+          <GiphyImageContainer submittedSearchTerm={submittedSearchTerm} />
+          <GiphyImageDrawer
+            handleAddToFavorites={() => {
+              console.log(`add to fav`)
+            }}
+          />
+        </DrawerContextProvider>
       </Box>
     </Box>
   )

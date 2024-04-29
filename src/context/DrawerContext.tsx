@@ -1,0 +1,48 @@
+import React, { ReactNode, createContext, useContext, useState } from 'react'
+import { GifObject } from '../api-types'
+
+export interface SelectedGifContextData {
+  selectedGif: GifObject | null
+  setSelectedGif: (gif: GifObject | null) => void
+  isDrawerOpen: boolean
+  setIsDrawerOpen: (isOpen: boolean) => void
+}
+
+export interface SelectedGifProviderProps {
+  children: ReactNode
+}
+
+const DrawerContext = createContext<SelectedGifContextData | undefined>(
+  undefined
+)
+
+export const DrawerContextProvider: React.FC<SelectedGifProviderProps> = ({
+  children
+}) => {
+  const [selectedGif, setSelectedGif] = useState<GifObject | null>(null)
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <DrawerContext.Provider
+      value={{
+        selectedGif,
+        setSelectedGif,
+        isDrawerOpen: isOpen,
+        setIsDrawerOpen: setIsOpen
+      }}
+    >
+      {children}
+    </DrawerContext.Provider>
+  )
+}
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const useDrawerContext = (): SelectedGifContextData => {
+  const context = useContext(DrawerContext)
+  if (!context) {
+    throw new Error(
+      'useDrawerContext must be used within a DrawerContextProvider'
+    )
+  }
+  return context
+}
