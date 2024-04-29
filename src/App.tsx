@@ -26,7 +26,9 @@ function App() {
       display="flex"
       flexDirection="column"
       justifyContent="center"
+      alignItems="center"
       minHeight="100vh"
+      maxWidth="500px"
     >
       <Box
         component="header"
