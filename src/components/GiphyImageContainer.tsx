@@ -15,7 +15,8 @@ export interface GiphyImageContainerProps extends BoxProps {
 }
 
 export const GiphyImageContainer = ({
-  numPerPage = 10
+  numPerPage = 10,
+  ...boxProps
 }: GiphyImageContainerProps) => {
   const { submittedSearchTerm } = useSearchContext()
   const { page, setTotalPages } = usePaginationContext()
@@ -79,6 +80,7 @@ export const GiphyImageContainer = ({
       flex={1}
       justifyContent="center"
       pt={2}
+      {...boxProps}
     >
       <Typography
         variant="subtitle1"

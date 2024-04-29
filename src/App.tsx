@@ -39,10 +39,9 @@ function App() {
             justifyContent="center"
             alignItems="center"
             flex={1}
-            height="100%"
           >
             <DrawerContextProvider>
-              <GiphyImageContainer numPerPage={10} />
+              <GiphyImageContainer numPerPage={10} alignSelf="flex-start" />
               <GiphyImageDrawer
                 handleAddToFavorites={() => {
                   console.log(`add to fav`)
