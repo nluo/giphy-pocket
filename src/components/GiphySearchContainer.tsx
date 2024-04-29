@@ -9,6 +9,7 @@ import ClearIcon from '@mui/icons-material/Clear'
 import { useSearchContext } from '../context/SearchContext'
 import { useState } from 'react'
 import { BoxProps } from '@mui/system'
+import { usePaginationContext } from '../context/PaginationContext'
 
 export interface GiphyImageSearchContainerProps extends BoxProps {}
 
@@ -17,6 +18,7 @@ export const GiphyImageSearchContainer = ({
 }: GiphyImageSearchContainerProps) => {
   const [searchTerm, setSearchTerm] = useState('')
   const { setSubmittedSearchTerm } = useSearchContext()
+  const { setPage } = usePaginationContext()
   const handleSearch = () => {
     setSubmittedSearchTerm(searchTerm)
   }
@@ -38,6 +40,7 @@ export const GiphyImageSearchContainer = ({
                 onClick={() => {
                   setSearchTerm('')
                   setSubmittedSearchTerm('')
+                  setPage(1)
                 }}
               >
                 <ClearIcon />
