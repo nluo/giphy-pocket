@@ -2,6 +2,12 @@
 
 A mobile first react + typescript application to show trending/search Gifs from Giphy API.
 
+## Note
+
+There is a possible bug in Giphy API that would stop the last page in current pagination logic working properly. 
+
+Please see this [issue](https://github.com/nluo/giphy-pocket/issues/4)
+
 ## Getting Started
 
 1. **Install dependencies**
