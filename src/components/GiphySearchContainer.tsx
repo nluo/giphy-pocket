@@ -21,22 +21,7 @@ export const GiphyImageSearchContainer = ({
     setSubmittedSearchTerm(searchTerm)
   }
   return (
-    <Box
-      component="header"
-      display="flex"
-      flexDirection="row"
-      gap={4}
-      px={2}
-      py={2}
-      position="sticky"
-      bgcolor="#fff"
-      top={0}
-      sx={{
-        boxShadow: '0 -2px 10px rgba(0,0,0,0.2)', // Creates a shadow at the top of the footer
-        borderBottom: '1px solid #ccc' // Adds a top border
-      }}
-      {...boxProps}
-    >
+    <Box display="flex" flexDirection="row" bgcolor="#fff" {...boxProps}>
       <TextField
         id="standard-basic"
         label="Search Gifs..."

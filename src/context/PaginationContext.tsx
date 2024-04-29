@@ -1,10 +1,10 @@
 import React, { ReactNode, createContext, useContext, useState } from 'react'
 
 interface PaginationContextData {
-  pageCount: number
-  totalItems: number
-  setPageCount: (pageCount: number) => void
-  setTotalItems: (totalItems: number) => void
+  page: number
+  totalPages: number
+  setPage: (pageCount: number) => void
+  setTotalPages: (totalItems: number) => void
 }
 
 const PaginationContext = createContext<PaginationContextData | undefined>(
@@ -18,12 +18,17 @@ export interface PaginationContextProviderProps {
 export const PaginationProvider: React.FC<PaginationContextProviderProps> = ({
   children
 }) => {
-  const [pageCount, setPageCount] = useState(0)
-  const [totalItems, setTotalItems] = useState(0)
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(0)
 
   return (
     <PaginationContext.Provider
-      value={{ pageCount, totalItems, setPageCount, setTotalItems }}
+      value={{
+        page,
+        totalPages,
+        setPage,
+        setTotalPages
+      }}
     >
       {children}
     </PaginationContext.Provider>
