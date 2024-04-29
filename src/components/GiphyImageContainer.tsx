@@ -7,6 +7,7 @@ import { useGiphyPagination } from '../hooks/useTrendingGiphy'
 import { useState } from 'react'
 import { useDrawerContext } from '../context/DrawerContext'
 import { GiphyPaginationControl } from './PaginationFooter'
+import { useSearchContext } from '../context/SearchContext'
 
 export interface GiphyImageContainerProps extends BoxProps {
   numPerPage?: number
@@ -14,10 +15,10 @@ export interface GiphyImageContainerProps extends BoxProps {
 }
 
 export const GiphyImageContainer = ({
-  numPerPage = 10,
-  submittedSearchTerm = ``
+  numPerPage = 10
 }: GiphyImageContainerProps) => {
   const [page, setPage] = useState(1)
+  const { submittedSearchTerm } = useSearchContext()
   const { data, isLoading, error } = useGiphyPagination(
     page,
     numPerPage,
@@ -25,9 +26,6 @@ export const GiphyImageContainer = ({
   )
   const { setSelectedGif, setIsDrawerOpen } = useDrawerContext()
   const handleGifClick = (gif: GifObject) => () => {
-    console.log(`🚀 ------------------------------🚀`)
-    console.log(`🚀 ~ handleGifClick ~ gif:`, gif)
-    console.log(`🚀 ------------------------------🚀`)
     setSelectedGif(gif)
     setIsDrawerOpen(true)
   }
@@ -75,6 +73,7 @@ export const GiphyImageContainer = ({
       display="flex"
       flexDirection="column"
       width="100%"
+      flex={1}
       justifyContent="center"
       pt={2}
     >
@@ -98,6 +97,7 @@ export const GiphyImageContainer = ({
 
           return (
             <GiphyImageLoader
+              key={item.id}
               imageUrl={`${fixedWidthImage.url}`}
               altText={altText}
               height={Number(fixedWidthImage.height)}
@@ -109,7 +109,8 @@ export const GiphyImageContainer = ({
         sx={{
           columnCount: 2,
           columnGap: 1,
-          px: 1
+          px: 1,
+          flex: 1
         }}
       />
       <GiphyPaginationControl
