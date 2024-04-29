@@ -44,9 +44,6 @@ export const GiphyImageDrawer = ({
         flexDirection="column"
         gap={3}
         padding={2}
-        //   width="100%"
-        //   height="100%"
-        //   position="relative"
         bgcolor="#fff"
         sx={{
           display: 'flex'
@@ -103,6 +100,7 @@ export const GiphyImageDrawer = ({
             color="primary"
             startIcon={<StarIcon />}
             onClick={handleAddToFavorites}
+            disabled={true}
           >
             Add to favorites
           </Button>
