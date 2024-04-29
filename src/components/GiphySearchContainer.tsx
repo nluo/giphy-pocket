@@ -20,6 +20,8 @@ export const GiphyImageSearchContainer = ({
   const { setSubmittedSearchTerm } = useSearchContext()
   const { setPage } = usePaginationContext()
   const handleSearch = () => {
+    // reset the page to 1
+    setPage(1)
     setSubmittedSearchTerm(searchTerm)
   }
   return (
