@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
+import { GiphyTrendingResponse } from '../api-types'
 
 export const useTrendingGiphy = ({ numPerPage = 10 }) => {
   return useQuery({
     queryKey: [`trending-gifs`],
-    queryFn: async () => {
+    queryFn: async (): Promise<GiphyTrendingResponse> => {
       const apiKey = import.meta.env.VITE_GIPHY_API_KEY
 
       if (!apiKey) {
