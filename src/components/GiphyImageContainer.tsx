@@ -1,13 +1,7 @@
 import { Box, BoxProps, CircularProgress, Typography } from '@mui/material'
-
 import { GiphyImageList } from './GiphyImageList'
 import { GiphyImageLoader } from './GiphyImageLoader'
-import { GifObject } from '../api-types'
-import { useGiphyPagination } from '../hooks/useTrendingGiphy'
-import { useDrawerContext } from '../context/DrawerContext'
-import { useSearchContext } from '../context/SearchContext'
-import { usePaginationContext } from '../context/PaginationContext'
-import { useEffect } from 'react'
+import { useGiphyData } from '../hooks/useGiphyData'
 
 export interface GiphyImageContainerProps extends BoxProps {
   numPerPage?: number
@@ -18,30 +12,8 @@ export const GiphyImageContainer = ({
   numPerPage = 10,
   ...boxProps
 }: GiphyImageContainerProps) => {
-  const { submittedSearchTerm } = useSearchContext()
-  const { page, setTotalPages } = usePaginationContext()
-  const { data, isLoading, error } = useGiphyPagination(
-    page,
-    numPerPage,
-    submittedSearchTerm
-  )
-
-  useEffect(() => {
-    const totalItemCount = data?.pagination?.total_count
-    if (!totalItemCount) {
-      return
-    }
-    const pageCount = Math.ceil(totalItemCount / numPerPage)
-
-    setTotalPages(pageCount)
-  }, [data, numPerPage, setTotalPages])
-
-  const { setSelectedGif, setIsDrawerOpen } = useDrawerContext()
-  const handleGifClick = (gif: GifObject) => () => {
-    setSelectedGif(gif)
-    setIsDrawerOpen(true)
-  }
-
+  const { data, isLoading, error, handleGifClick, submittedSearchTerm } =
+    useGiphyData(numPerPage)
   if (isLoading) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center">
