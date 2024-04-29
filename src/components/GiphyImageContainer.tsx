@@ -1,10 +1,4 @@
-import {
-  Box,
-  BoxProps,
-  CircularProgress,
-  Pagination,
-  Typography
-} from '@mui/material'
+import { Box, BoxProps, CircularProgress, Typography } from '@mui/material'
 
 import { GiphyImageList } from './GiphyImageList'
 import { GiphyImageLoader } from './GiphyImageLoader'
@@ -12,6 +6,7 @@ import { GifObject } from '../api-types'
 import { useGiphyPagination } from '../hooks/useTrendingGiphy'
 import { useState } from 'react'
 import { useDrawerContext } from '../context/DrawerContext'
+import { GiphyPaginationControl } from './PaginationFooter'
 
 export interface GiphyImageContainerProps extends BoxProps {
   numPerPage?: number
@@ -114,35 +109,16 @@ export const GiphyImageContainer = ({
         sx={{
           columnCount: 2,
           columnGap: 1,
-
           px: 1
         }}
       />
-      <Box
-        component="footer"
-        width="100%"
-        paddingY={2}
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
+      <GiphyPaginationControl
+        pageCount={pageCount}
+        handlePageChange={handlePageChange}
+        page={page}
         position="sticky"
         bottom="0"
-        sx={{
-          bgcolor: '#fff',
-          borderTopLeftRadius: 16,
-          borderTopRightRadius: 16,
-          boxShadow: '0 -2px 10px rgba(0,0,0,0.2)', // Creates a shadow at the top of the footer
-          borderTop: '1px solid #ccc'
-        }}
-      >
-        <Pagination
-          count={pageCount} // Total number of pages
-          page={page}
-          onChange={handlePageChange}
-          color="primary"
-          // size="large"
-        />
-      </Box>
+      />
     </Box>
   )
 }

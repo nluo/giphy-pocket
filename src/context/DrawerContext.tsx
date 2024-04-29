@@ -1,22 +1,20 @@
 import React, { ReactNode, createContext, useContext, useState } from 'react'
 import { GifObject } from '../api-types'
 
-export interface SelectedGifContextData {
+export interface DrawerContextData {
   selectedGif: GifObject | null
   setSelectedGif: (gif: GifObject | null) => void
   isDrawerOpen: boolean
   setIsDrawerOpen: (isOpen: boolean) => void
 }
 
-export interface SelectedGifProviderProps {
+export interface DrawerContextProviderProps {
   children: ReactNode
 }
 
-const DrawerContext = createContext<SelectedGifContextData | undefined>(
-  undefined
-)
+const DrawerContext = createContext<DrawerContextData | undefined>(undefined)
 
-export const DrawerContextProvider: React.FC<SelectedGifProviderProps> = ({
+export const DrawerContextProvider: React.FC<DrawerContextProviderProps> = ({
   children
 }) => {
   const [selectedGif, setSelectedGif] = useState<GifObject | null>(null)
@@ -37,7 +35,7 @@ export const DrawerContextProvider: React.FC<SelectedGifProviderProps> = ({
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const useDrawerContext = (): SelectedGifContextData => {
+export const useDrawerContext = (): DrawerContextData => {
   const context = useContext(DrawerContext)
   if (!context) {
     throw new Error(
