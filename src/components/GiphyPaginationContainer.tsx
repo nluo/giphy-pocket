@@ -1,4 +1,4 @@
-import { Box, Pagination } from '@mui/material'
+import { Box, Pagination, Skeleton } from '@mui/material'
 import { BoxProps } from '@mui/system'
 import { usePaginationContext } from '../context/PaginationContext'
 export interface GiphyPaginationControlProps extends BoxProps {}
@@ -33,12 +33,18 @@ export const GiphyPaginationContainer = ({
       }}
       {...boxProps}
     >
-      <Pagination
-        count={totalPages}
-        page={page}
-        onChange={handlePageChange}
-        color="primary"
-      />
+      {/* show a rectangle skeleton with 32px height if totalPages is 0  */}
+
+      {totalPages === 0 ? (
+        <Skeleton variant="rectangular" height="32px" width="100%" />
+      ) : (
+        <Pagination
+          count={totalPages}
+          page={page}
+          onChange={handlePageChange}
+          color="primary"
+        />
+      )}
     </Box>
   )
 }
